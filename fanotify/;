@@ -1,0 +1,12 @@
+#include <iostream>
+#include "Fanotify.h"
+#include "Epoll.h"
+
+int main() {
+    epOperation ep ;
+    Fanotify notify ;   
+    notify.fanotifyInit() ;
+    int fd = notify.getEvent() ;
+    return 0;
+}
+
