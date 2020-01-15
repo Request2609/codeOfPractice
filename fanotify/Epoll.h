@@ -10,7 +10,7 @@
 using namespace std ;
 
 class epOperation {
-public :
+private :
     epOperation():fds(0),nfds(200) {
         epFd = epoll_create(1) ;
        //设置了epfds的capacity大小
@@ -21,11 +21,12 @@ public :
     static void del(int epFd, int fd) ;
 public :
     int getEpFd() {return epFd ;}
-    int  wait(int64_t timeout, Fanotify* notify) ;
+    int  wait(int64_t timeout) ;
     void add(int fd, int events) ;
     void change(int fd, int events) ;
     void del(int fd) ;
 private :
+    
     int epFd ;
     //帮助更新epoll中的事件数量
     int fds ;

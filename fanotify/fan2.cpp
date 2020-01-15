@@ -1,9 +1,4 @@
-#include <iostream>
-/*
- *这个程序是fanotify启用FAN_REPORT_FID。程序标记文件对象
- 作为命令行参数传递。并等待类型为事件已经创建，事件掩码指示文件系统
- 对象已创建文件或者目录，一些事件已经被从缓冲区中读取并进程相应的处理
- * */
+#define _GNU_SOURCE
 #include <errno.h>
 #include <fcntl.h>
 #include <limits.h>
@@ -13,11 +8,10 @@
 #include <sys/stat.h>
 #include <sys/fanotify.h>
 #include <unistd.h>
-#include "fanotify-syscalllib.h"
 
 #define BUF_SIZE 256
 
-int
+    int
 main(int argc, char **argv)
 {
     int fd, ret, event_fd;

@@ -1,14 +1,10 @@
 #include <iostream>
 #include "Fanotify.h"
-#include "Epoll.h"
 
-int main() {
-    epOperation ep ;
-    Fanotify notify ;   
-    notify.fanotifyInit() ;
-    int fd = notify.getNotifyFD() ;
-    ep.add(fd, EPOLLIN) ;
-    ep.wait(-1, &notify) ;
+int main(int argc, char** argv) {
+    Fanotify notify ;
+    notify.setNotifyObject(argv[1]) ;
+    notify.startListen() ;
     return 0;
 }
 
