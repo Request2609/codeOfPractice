@@ -3,6 +3,7 @@
 #include <inttypes.h>
 #include <fcntl.h>
 #include <linux/limits.h>
+#include <iostream>
 #include <signal.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -14,12 +15,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <iostream>
+#include <string.h>
 #include <linux/fanotify.h>
-//#include "Epoll.h"
 #include "fanotify-syscalllib.h"
 
-#define FANOTIFY_ARGUMENTS "cdfhmnp"
 
 const int OPEN = 1 ;
 const int MODIFY = 2 ;
@@ -35,17 +34,18 @@ public:
     //获取句柄
     int getNotifyFD() ;
     void startListen() ;
+    void detectOpenClose() ;
+    void detectWrite() ;
+    //在监控期间可以操作文件
+    void operationFile(int fd) ;
     //开始监听函数
 private:
-    int selectEvent() ;
-    int getEvent(const struct fanotify_event_metadata* metadata) ;
+    std::string paths ;
+    int handlePerm(const struct fanotify_event_metadata* metadata) ;
+    int selectEvent(fd_set* rfd) ;
+    int getEvent(const struct fanotify_event_metadata* metadata, int len) ;
     //设置检测对象的
-    int makeObject(const std:: string path);
  //   std::shared_ptr<epOperation>ep ;
     int fanFd ;
-    uint64_t fMask ;
-    unsigned int markFlag ;
-    int fanMask ;
-    int initFlag ;
 };
 

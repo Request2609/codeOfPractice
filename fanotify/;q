@@ -1,38 +1,39 @@
 #include "Fanotify.h"
 
 Fanotify :: Fanotify() {
+    std::cout << "设置监听标志" << std::endl ;
+    fanMask |= FAN_ONDIR ;
+    fanMask |= FAN_OPEN ;
+    fanMask |= FAN_CLOSE ;
+    fanMask |= FAN_MODIFY ;
+    fanMask |= FAN_EVENT_ON_CHILD  ;  
+    markFlag = FAN_MARK_ADD ;
 }
 
 Fanotify :: ~Fanotify() {
     close(fanFd) ;
 }
 
-void Fanotify:: detectOpenClose() {
-    std::cout << "设置开关" << std::endl ;
-    int ret = fanotify_mark(fanFd, FAN_MARK_ADD, FAN_CLOSE|FAN_OPEN, AT_FDCWD, paths.c_str()) ;
-    if(ret < 0) {
-        std:: cout << __FILE__ << "    " << __LINE__ << std:: endl ;
-    }
-}
-
 //设置监控对象为目录下的子文件
 void Fanotify::setNotifyObject(std::string path) {
-    this->paths = path ;
-    fanFd = fanotify_init(FAN_CLASS_CONTENT, O_RDWR) ;
+    std::cout << path << std::endl ;
+    initFlag = 0 ;
+    fanFd = fanotify_init(FAN_CLASS_NOTIF, O_RDWR) ;
     if(fanFd < 0) {
         std :: cout << __FILE__ << "   " << __LINE__ << "     " << strerror(errno)<< std :: endl ;
         return ;
     }
     std::cout << "初始化完成" << std::endl ;
-    uint64_t fanMask = 0;
-    fanMask |= FAN_OPEN_PERM ;
-    fanMask |= FAN_ALL_PERM_EVENTS ;
-    int ret = fanotify_mark(fanFd, FAN_MARK_ADD, fanMask|FAN_EVENT_ON_CHILD, 
-                            AT_FDCWD, path.c_str()) ;
+    int ret = markObject(path.c_str()) ;
     if(ret < 0) {
         std::cout << __LINE__ <<"   " __FILE__ << "   " << strerror(errno) << std::endl ;
     }
     std::cout << "对象处理完成"<< std::endl ;
+}
+
+//设置监控的对象
+int Fanotify:: markObject(std:: string paths) {
+       return fanotify_mark(fanFd, markFlag, fanMask, AT_FDCWD, paths.c_str()) ;
 }
 
 int Fanotify :: getNotifyFD() {
@@ -49,7 +50,7 @@ void Fanotify:: startListen() {
     std::cout << "开始监听" << std::endl ;
     selectEvent(&rfd) ;
     std:: cout << "发生事件" <<std::endl ;
-    while((len = read(fanFd, buf, sizeof(buf))) > 0) {
+    while((len = read(fanFd, buf, sizeof(buf))) < 0) {
         struct fanotify_event_metadata* metadata ;
         char path[PATH_MAX] ;
         int pathLen ;
@@ -58,23 +59,21 @@ void Fanotify:: startListen() {
             sprintf(path, "/proc/self/fd/%d", metadata->fd) ;
             pathLen = readlink(path, path, sizeof(path)-1) ;
             if(pathLen < 0) {
-                std :: cout << __LINE__ << "     " << __FILE__ << std::endl ;
                 exit(1) ;
             }
             path[pathLen] = '\0' ;
-            getEvent(metadata, len) ;
-            std::cout << "检测完成" << std::endl ;
+            //     }
+            std::cout << "发生事件的进程ID:"<< metadata->pid << std::endl ;
+            int flag = getEvent(metadata, len) ;   
         }
         selectEvent(&rfd) ;
     }
-    std::cout << strerror(errno) << std :: endl ;
 }
 
 int Fanotify:: selectEvent(fd_set* rfd) {
    std::cout << "阻塞" << std::endl ;
     while(select(fanFd+1, rfd, NULL, NULL, NULL) < 0) {
         if(errno != EINTR) {
-            std ::cout << __LINE__ <<  "     " << std::endl ;
             exit(0) ;
         }
     }
@@ -87,56 +86,25 @@ int Fanotify::getEvent(const struct fanotify_event_metadata* metadata, int len) 
         //处理matadata
         if(metadata->mask&FAN_OPEN) {
             std :: cout << "文件被打开" << std:: endl ;
-            int fd = metadata->fd ;
-            /*const char* buf = "hello,it's a secret!" ;
-            write(fd, buf, strlen(buf)) ;*/
+            return OPEN ;
         }   
         if(metadata->mask&FAN_CLOSE) {
             if(metadata->mask&FAN_CLOSE_WRITE) {
-                std:: cout << "写关闭" << std:: endl  ;
+                std:: cout << "write(writeble)" << std:: endl  ;
                 return CLOSE_MODIFY ;
             }   
             if(metadata->mask&FAN_CLOSE_NOWRITE) {
-                std :: cout << "关闭操作" <<std:: endl ;
+                std :: cout << "close" <<std:: endl ;
+                return CLOSE ;
             }
         }
         if(metadata->mask&FAN_MODIFY){
             std::cout << "修改" << std :: endl ;
+            return MODIFY;
         }
-        if(metadata->mask&FAN_OPEN_PERM) {
-            std::cout << "open perm" << std::endl  ;
-        }
-        if(metadata->mask&FAN_ALL_PERM_EVENTS) {
-            std::cout << "给内核发送消息" << std::endl ;
-            handlePerm(metadata) ;
-            //操作文件
-            operationFile(metadata->fd) ;
-            detectOpenClose() ;
-        }
+        if(metadata->fd >= 0 && close(metadata->fd) != 0) exit(1) ;
         metadata = FAN_EVENT_NEXT(metadata, len) ;
     }   
     return 1 ;
 }   
-
-void Fanotify::operationFile(int fd) {
-    const char* buf = "okokokokokokokok" ;
-    int ret = write(fd, buf, strlen(buf)) ;
-    if(ret < 0) {
-        std::cout << "写失败" <<std:: endl ;
-    }
-    close(fd) ;
-}
-
-int Fanotify::handlePerm(const struct fanotify_event_metadata *metadata) {
-    struct fanotify_response response_struct;
-    int ret;
-    response_struct.fd = metadata->fd;
-    response_struct.response = FAN_ALLOW;
-
-    ret = write(fanFd, &response_struct, sizeof(response_struct));
-    if (ret < 0)
-        return ret;
-
-    return 0;
-}
 
