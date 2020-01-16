@@ -5,12 +5,13 @@
 #include <string.h>
 #include <iostream>
 #include <unistd.h>
+#include <poll.h>
 #include "Fanotify.h"
 
 using namespace std ;
 
 class epOperation {
-private :
+public :
     epOperation():fds(0),nfds(200) {
         epFd = epoll_create(1) ;
        //设置了epfds的capacity大小
@@ -21,7 +22,7 @@ private :
     static void del(int epFd, int fd) ;
 public :
     int getEpFd() {return epFd ;}
-    int  wait(int64_t timeout) ;
+    int  wait(int64_t timeout, vector<int>&fdList) ;
     void add(int fd, int events) ;
     void change(int fd, int events) ;
     void del(int fd) ;

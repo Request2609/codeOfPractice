@@ -1,0 +1,56 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BUF_SIZE	fan1.cpp	18;"	d	file:
+BUF_SIZE	fan2.cpp	12;"	d	file:
+CLOSE	Fanotify.h	/^const int CLOSE = 4 ;$/;"	v
+CLOSE_MODIFY	Fanotify.h	/^const int CLOSE_MODIFY = 3;$/;"	v
+Fanotify	Fanotify.cpp	/^Fanotify :: Fanotify() {$/;"	f	class:Fanotify
+Fanotify	Fanotify.h	/^class Fanotify {$/;"	c
+MODIFY	Fanotify.h	/^const int MODIFY = 2 ;$/;"	v
+OPEN	Fanotify.h	/^const int OPEN = 1 ;$/;"	v
+_EPOLL_H_	Epoll.h	2;"	d
+_FAN_H_	fan.h	2;"	d
+_GNU_SOURCE	fan2.cpp	1;"	d	file:
+__FANOTIFY_SYSCALL_LIB	fanotify-syscalllib.h	2;"	d
+__NR_fanotify_init	fanotify-syscalllib.h	11;"	d
+__NR_fanotify_init	fanotify-syscalllib.h	8;"	d
+__NR_fanotify_mark	fanotify-syscalllib.h	12;"	d
+__NR_fanotify_mark	fanotify-syscalllib.h	9;"	d
+add	Epoll.cpp	/^void epOperation :: add(int fd, int events) {$/;"	f	class:epOperation
+change	Epoll.cpp	/^void epOperation :: change(int fd, int events) {$/;"	f	class:epOperation
+del	Epoll.cpp	/^void epOperation :: del(int epFd, int fd) {$/;"	f	class:epOperation
+del	Epoll.cpp	/^void epOperation :: del(int fd) {$/;"	f	class:epOperation
+detectOpenClose	Fanotify.cpp	/^void Fanotify:: detectOpenClose() {$/;"	f	class:Fanotify
+epFd	Epoll.h	/^    int epFd ;$/;"	m	class:epOperation
+epFds	Epoll.h	/^    std :: vector<struct epoll_event> epFds ;$/;"	m	class:epOperation
+epOperation	Epoll.h	/^    epOperation():fds(0),nfds(200) {$/;"	f	class:epOperation
+epOperation	Epoll.h	/^class epOperation {$/;"	c
+fanFd	Fanotify.h	/^    int fanFd ;$/;"	m	class:Fanotify
+fanotify_init	fanotify-syscalllib.h	/^static inline int fanotify_init(unsigned int flags, unsigned int event_f_flags)$/;"	f
+fanotify_mark	fanotify-syscalllib.h	/^static inline int fanotify_mark(int fanotify_fd, unsigned int flags, __u64 mask,$/;"	f
+fds	Epoll.h	/^    int fds ;$/;"	m	class:epOperation
+getEpFd	Epoll.h	/^    int getEpFd() {return epFd ;}$/;"	f	class:epOperation
+getEvent	Fanotify.cpp	/^int Fanotify::getEvent(const struct fanotify_event_metadata* metadata, int len) {$/;"	f	class:Fanotify
+getNotifyFD	Fanotify.cpp	/^int Fanotify :: getNotifyFD() {$/;"	f	class:Fanotify
+handlePerm	Fanotify.cpp	/^int Fanotify::handlePerm(const struct fanotify_event_metadata *metadata) {$/;"	f	class:Fanotify
+handle_events	fan.h	/^handle_events(int fd)$/;"	f
+main	a.cpp	/^int main()$/;"	f
+main	fan.cpp	/^int main(int argc, char *argv[])$/;"	f
+main	fan1.cpp	/^main(int argc, char **argv)$/;"	f
+main	fan2.cpp	/^main(int argc, char **argv)$/;"	f
+main	main.cpp	/^int main(int argc, char** argv) {$/;"	f
+main	test.cpp	/^int main(int argc, char** argv)$/;"	f
+main	test/1.c	/^int main()$/;"	f
+nfds	Epoll.h	/^    int nfds ;$/;"	m	class:epOperation
+operationFile	Fanotify.cpp	/^void Fanotify::operationFile(int fd) {$/;"	f	class:Fanotify
+paths	Fanotify.h	/^    std::string paths ;$/;"	m	class:Fanotify
+selectEvent	Fanotify.cpp	/^int Fanotify:: selectEvent(fd_set* rfd) {$/;"	f	class:Fanotify
+setNotifyObject	Fanotify.cpp	/^void Fanotify::setNotifyObject(std::string path) {$/;"	f	class:Fanotify
+startListen	Fanotify.cpp	/^void Fanotify:: startListen() {$/;"	f	class:Fanotify
+wait	Epoll.cpp	/^int epOperation :: wait(int64_t timeout) {$/;"	f	class:epOperation
+~Fanotify	Fanotify.cpp	/^Fanotify :: ~Fanotify() {$/;"	f	class:Fanotify
+~epOperation	Epoll.h	/^    ~epOperation() { close(epFd) ; }$/;"	f	class:epOperation

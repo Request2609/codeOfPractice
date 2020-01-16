@@ -7,7 +7,7 @@ using namespace std ;
 int main()
 {
 
-    int fd = open("test/1.c", O_RDWR) ;
+    int fd = open("test/aa/2.c", O_RDWR) ;
     const char* buf = "hello world" ;
     getchar() ;
     char bb[1024] ;
