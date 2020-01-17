@@ -1,0 +1,40 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CC	Makefile	/^CC=gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS=-Wall -g$/;"	m
+OBJS	Makefile	/^OBJS=inotify_test.o inotify_utils.o event_queue.o$/;"	m
+SRCS	Makefile	/^SRCS=inotify_test.c inotify_utils.c event_queue.c$/;"	m
+__EVENT_QUEUE_H	event_queue.h	2;"	d
+__INOTIFY_UTILS_H	inotify_utils.h	2;"	d
+close_inotify_fd	inotify_utils.c	/^int close_inotify_fd (int fd)$/;"	f
+event_check	inotify_utils.c	/^int event_check (int fd)$/;"	f
+handle_event	inotify_utils.c	/^void handle_event (queue_entry_t event)$/;"	f
+handle_events	inotify_utils.c	/^void handle_events (queue_t q)$/;"	f
+head	event_queue.h	/^  struct queue_entry * head;$/;"	m	struct:queue_struct	typeref:struct:queue_struct::queue_entry
+ignore_wd	inotify_utils.c	/^int ignore_wd (int fd, int wd)$/;"	f
+inot_ev	event_queue.h	/^  struct inotify_event inot_ev;$/;"	m	struct:queue_entry	typeref:struct:queue_entry::inotify_event
+keep_running	inotify_test.c	/^int keep_running;$/;"	v
+main	a.cpp	/^int main()$/;"	f
+main	inotify_test.c	/^int main (int argc, char **argv)$/;"	f
+main	test/1.c	/^int main()$/;"	f
+next_ptr	event_queue.h	/^  struct queue_entry * next_ptr;   \/* Pointer to next entry *\/$/;"	m	struct:queue_entry	typeref:struct:queue_entry::queue_entry
+open_inotify_fd	inotify_utils.c	/^int open_inotify_fd ()$/;"	f
+process_inotify_events	inotify_utils.c	/^int process_inotify_events (queue_t q, int fd)$/;"	f
+queue_create	event_queue.c	/^queue_t queue_create ()$/;"	f
+queue_dequeue	event_queue.c	/^queue_entry_t  queue_dequeue (queue_t q)$/;"	f
+queue_destroy	event_queue.c	/^void queue_destroy (queue_t q)$/;"	f
+queue_empty	event_queue.c	/^int queue_empty (queue_t q)$/;"	f
+queue_enqueue	event_queue.c	/^void queue_enqueue (queue_entry_t d, queue_t q)$/;"	f
+queue_entry	event_queue.h	/^struct queue_entry$/;"	s
+queue_entry_t	event_queue.h	/^typedef struct queue_entry * queue_entry_t;$/;"	t	typeref:struct:queue_entry
+queue_struct	event_queue.h	/^struct queue_struct$/;"	s
+queue_t	event_queue.h	/^typedef struct queue_struct *queue_t;$/;"	t	typeref:struct:queue_struct
+read_events	inotify_utils.c	/^int read_events (queue_t q, int fd)$/;"	f
+signal_handler	inotify_test.c	/^void signal_handler (int signum)$/;"	f
+tail	event_queue.h	/^  struct queue_entry * tail;$/;"	m	struct:queue_struct	typeref:struct:queue_struct::queue_entry
+watch_dir	inotify_utils.c	/^int watch_dir (int fd, const char *dirname, unsigned long mask)$/;"	f
+watched_items	inotify_utils.c	/^static int watched_items;$/;"	v	file:
