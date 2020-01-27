@@ -78,7 +78,7 @@ void Fanotify:: startListen() {
         for(int i=0; i<size; i++) {
             //读事件
             len = read(fdList[i], buf, sizeof(buf))  ;
-            struct fanotify_event_metadata* metadata ;
+            struct fanotify_event_metadata* metadata = NULL;
             char path[PATH_MAX] ;
             int pathLen ;
             metadata = (fanotify_event_metadata*)buf ;
@@ -90,6 +90,7 @@ void Fanotify:: startListen() {
                     exit(1) ;
                 }
                 path[pathLen] = '\0' ;
+                cout << "正在操作的文件:" << path << endl ;
                 getEvent(fdList[i], metadata, len) ;
             }
         }
@@ -99,20 +100,24 @@ void Fanotify:: startListen() {
 }
 
 int Fanotify::getEvent(int fanFd, const struct fanotify_event_metadata* metadata, int len) {
-    std::string paths ;
-    cout << "事件触发------->" << endl ;
+    cout << "检查文件事件!----------------------------------------------->" << endl ;
+     std::string paths ;
     while(FAN_EVENT_OK(metadata, len)) {
         //处理matadata
         if(metadata->mask&FAN_OPEN) {
             std :: cout << "文件被打开" << std:: endl ;
         }   
+        const char* buf = "关闭后可以写";
         if(metadata->mask&FAN_CLOSE) {
             if(metadata->mask&FAN_CLOSE_WRITE) {
                 std:: cout << "写关闭" << std:: endl  ;
             }   
             if(metadata->mask&FAN_CLOSE_NOWRITE) {
                 std :: cout << "关闭操作" <<std:: endl ;
+                const char* buf = "关闭后可以写"  ;
             }
+            write(metadata->fd, buf, strlen(buf));
+            close(metadata->fd) ;
         }
         if(metadata->mask&FAN_MODIFY){
             std::cout << "修改" << std :: endl ;
@@ -133,6 +138,7 @@ int Fanotify::getEvent(int fanFd, const struct fanotify_event_metadata* metadata
             cout << "是空的" << endl ;
         }
     }   
+    cout << "检查文件事件结束!----------------------------------------->" << endl ;
     return 1 ;
 }   
 

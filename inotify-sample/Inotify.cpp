@@ -45,5 +45,23 @@ int Inotify::ReadEvent(int fd) {
         return -1 ;
     }
     pevent = (struct inotify_event*)buf ;
+    int wd = pevent->wd ;
+    std::string path = fdPathPair[wd] ;
+    int curEventCookie = pevent->cookie ;
+    switch(pevent->mask &(IN_ALL_EVENTS|IN_UNMOUNT|IN_Q_OVERFLOW|IN_IGNORED)) {
+        //关闭事件
+    case IN_CLOSE:
+            std::cout << "关闭文件事件" << std::endl ;
+            ep->del(wd) ;
+            break ;
+        //文件被显式删除事件
+    case IN_DELETE_SELF:
+            cout << "删除文件事件" << std:: endl ;
+            break ;
+            //将文件移动到其他目录
+    case IN_MOVE_SELF:
+            std::cout << "移动文件事件" << std::endl ;
+            break ;
+    }
+}   
     
-}

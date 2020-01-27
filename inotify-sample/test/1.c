@@ -6,5 +6,4 @@ int main()
     return 0;
 }
 
-hello worldhello world
 hello world
