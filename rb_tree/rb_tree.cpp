@@ -155,7 +155,7 @@ void rb_tree :: fix_up_insert(NODE cur) {
     root->own_color = BLACK ;
 }   
 
-NODE rb_tree :: find_node(int num) {
+NODE rb_tree :: find_node(string key) {
     auto cur = root ;
     while(cur != nullptr) {
         if(num > cur->data) {
@@ -355,7 +355,7 @@ NODE rb_tree :: get_minimum(NODE cur) {
 
 //删除树中的一个节点
 void rb_tree :: rb_transform(NODE  cur, NODE son) {
-    //判断是不是根节点，是就讲儿子节点设置成根节点
+    //判断是不是根节点，是就将儿子节点设置成根节点
     if(cur->parent == null) {
         son->parent = null ;
         root = cur ;
@@ -456,7 +456,6 @@ void rb_tree :: insert_by_bst_way(NODE cur) {
     cur->left = null ;
     cur->right = null ;
     fix_up_insert(cur) ;
-   // print_rb_tree() ;
 }
 
 void rb_tree :: print_rb_tree() {

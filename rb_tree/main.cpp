@@ -4,6 +4,7 @@
 int main() {
 
     rb_tree rt ;
+    cout << "请向树中添加节点:" << endl ;
     while(1) {
         int a ;
         cin >> a ;
