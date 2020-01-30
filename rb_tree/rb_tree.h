@@ -14,13 +14,11 @@ const int  RED = 2 ;
 const int ALL = 3 ;
 
 class rb_tree ;
-template<class T>
 class tree_node ;
 class rb_tree ;
 
-typedef shared_ptr<tree_node<class T>> NODE ;
+typedef shared_ptr<tree_node> NODE ;
 
-template <class T>
 class tree_node {
     friend class rb_tree;
 public :
@@ -33,10 +31,10 @@ public :
         right(nullptr),
         parent(nullptr) 
     {}
-
     ~tree_node() {}
 private :
-    T data ;
+    string data ;
+    string value ;
     int own_color ;
     int original_color ;
     NODE root ;
@@ -51,15 +49,15 @@ public:
     rb_tree():root(nullptr) {}
     ~rb_tree() {}
 public :
-    void insert_tree(int info) ;
+    void insert_tree(string info) ;
     NODE find_node(string key) ;
-    void delete_node(int num) ;
+    void delete_node(string num) ;
     void print_rb_tree() ;
 private :
     NODE get_minimum(NODE cur) ;
     //右旋
     void rb_transform(NODE tmp1, NODE tmp2) ;
-    NODE get_delete_node(int num) ;
+    NODE get_delete_node(string num) ;
     void right_rotate(NODE cur) ;
     void left_rotate(NODE cur) ;
     void fix_up_insert(NODE cur) ;
@@ -69,4 +67,3 @@ private :
     NODE root ;
     NODE null ;
 };
-

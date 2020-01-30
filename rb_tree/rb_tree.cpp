@@ -1,6 +1,6 @@
 #include "rb_tree.h"
 
-void rb_tree:: insert_tree(int info) {
+void rb_tree:: insert_tree(string info) {
 
     NODE cur = make_shared<tree_node>() ;
     cur->data = info ;
@@ -158,10 +158,10 @@ void rb_tree :: fix_up_insert(NODE cur) {
 NODE rb_tree :: find_node(string key) {
     auto cur = root ;
     while(cur != nullptr) {
-        if(num > cur->data) {
+        if(key > cur->data) {
             cur = cur->right ;
         }
-        else if(num < cur->data) {
+        else if(key < cur->data) {
             cur = cur->left ;
         }
         else {
@@ -172,10 +172,10 @@ NODE rb_tree :: find_node(string key) {
 }
 
 //删除节点
-void rb_tree :: delete_node(int num) {
+void rb_tree :: delete_node(string key) {
 
     NODE x;
-    NODE cur = get_delete_node(num) ;
+    NODE cur = get_delete_node(key) ;
     while(cur != null) {
         //getchar() ;
         auto tmp = cur ;
@@ -220,11 +220,11 @@ void rb_tree :: delete_node(int num) {
         if(tmp->original_color == BLACK) {
             fix_delete_tree(x) ;
         }
-        cur = get_delete_node(num) ;
+        cur = get_delete_node(key) ;
     }
 }
 
-NODE rb_tree :: get_delete_node(int num) {
+NODE rb_tree :: get_delete_node(string num) {
     NODE cur = root ;
     while(cur != null) {
         if(cur->data == num) {
