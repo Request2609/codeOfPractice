@@ -77,19 +77,4 @@ public:
         return head ;
     }
 };
-int main() {
-    ListNode* node = NULL;
-    create(&node) ;
-    cout << "删除前"<< endl ;
-    print(node) ;
-    Solution ss ;
-    int a ;
-    cin  >> a ;
-    node = ss.removeElements(node, a) ;
-    cout << "删除后的结果!" << endl ;
-    print(node) ;
-    destroy(node) ;
-    
-    return 0;
-}
 

@@ -1,28 +1,19 @@
 #include <iostream>
-#include <future>
-#include <thread>
-#include <fcntl.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/stat.h>
-using namespace std ;
 
-void func() {
-    int fd = open("hello", O_RDWR) ;
-    if(fd < 0) {
-    cout <<"打开文件" << " 错误信息:" <<strerror(errno) << endl ;
-    }
-}
-    
-int main() {  
-    thread t1(func) ;
-    thread t2(func) ;
-    t1.join() ;
-    t2.join() ;
-    struct stat st ;
-    const char* name = "hello" ;
-    stat(name, &st) ;
-    cout << st.st_nlink << endl ;
-    getchar() ;
-}
+using namespace std;
 
+class Base {
+public:
+    virtual void f() { cout << "f()" << endl; }
+    virtual void g() { cout << "g()" << endl; }
+    virtual void h() { cout << "h()" << endl; }
+};
+
+int main()
+{
+    Base t;
+    (((void(*)())*((int*)(*((int*)&t)) + 0))   )     ();
+    (((void(*)())*((int*)(*((int*)&t)) + 1))   )     ();
+    (((void(*)())*((int*)(*((int*)&t)) + 2))   )     ();
+    return 0;
+}
