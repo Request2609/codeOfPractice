@@ -1,0 +1,46 @@
+//openssl生成秘钥  -out 后面是秘钥的名称，1024是生成秘钥的长度
+
+openssl genrsa -out openssl.key 1024
+
+penssl.key为之前生成的key的名字，openssl.cer为生成的证书名字，
+
+//3650为证书过期天数，CN的参数baidu.com是的你主机名或者IP地址。
+
+openssl req -new -x509 -key openssl.key -out openssl.cer -days 3650 -subj /CN=baidu.com
+
+//注意：生成pfx证书会提示设置密码，此密码要记住，提取密钥时要输入此密码。
+
+openssl pkcs12 -export -out openssl.pfx -inkey openssl.key -in openssl.cer
+
+从pfx里提取出密钥对
+
+openssl pkcs12 -in openssl.pfx -nocerts -nodes -out pubAndPri.key
+
+从密钥对里提取出私钥
+
+ openssl rsa -in  pubAndpri.key -out openssl_pri.key
+
+ 从密钥对里提取出公钥
+
+ openssl rsa -in pubAndpri.key -pubout -out openssl_pub.key
+
+ 因为RSA算法使用的是pkcs8模式补足，需要对提取的私钥进一步处理
+
+ openssl pkcs8 -topk8 -inform PEM -in openssl_pri.key -outform PEM -nocrypt
+
+
+
+
+----------------------------------------------------------------------------------
+生成pem私钥(PKCS1格式)]
+
+openssl genrsa -out /Desktop/private_key.pem 1024
+
+PKCS1私钥转换为PKCS8(该格式一般java调用)
+
+openssl pkcs8 -topk8 -inform PEM -in /Desktop/private_key.pem -outform pem -nocrypt -out /Desktop/private_pkcs8.pem
+
+生成公钥
+
+openssl rsa -in /Desktop/private_key.pem -out /Desktop/rsa_public_key.pem -pubout
+

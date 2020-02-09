@@ -1,0 +1,67 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Channel	async-ssl-svr.cc	/^    Channel(int fd, int events) {$/;"	f	struct:Channel
+Channel	async-ssl-svr.cc	/^struct Channel {$/;"	s	file:
+PROGRAMS	Makefile	/^PROGRAMS = $(SOURCES:.cc=)$/;"	m
+SOURCES	Makefile	/^SOURCES=async-ssl-svr.cc sync-ssl-svr.cc async-ssl-cli.cc sync-ssl-cli.cc$/;"	m
+SSLCon	async-ssl-cli.cc	/^struct SSLCon{$/;"	s	file:
+SSLCon	sync-ssl-cli.cc	/^struct SSLCon{$/;"	s	file:
+addEpollFd	async-ssl-svr.cc	/^void addEpollFd(int epollfd, Channel* ch) {$/;"	f
+check0	async-ssl-cli.cc	23;"	d	file:
+check0	async-ssl-svr.cc	25;"	d	file:
+check0	sync-ssl-cli.cc	16;"	d	file:
+check0	sync-ssl-svr.cc	20;"	d	file:
+check1	async-ssl-cli.cc	24;"	d	file:
+check1	async-ssl-svr.cc	26;"	d	file:
+check1	sync-ssl-cli.cc	17;"	d	file:
+check1	sync-ssl-svr.cc	21;"	d	file:
+createServer	async-ssl-svr.cc	/^int createServer(short port) {$/;"	f
+epollfd	async-ssl-svr.cc	/^int epollfd, listenfd;$/;"	v
+events_	async-ssl-svr.cc	/^    int events_;$/;"	m	struct:Channel	file:
+fd_	async-ssl-svr.cc	/^    int fd_;$/;"	m	struct:Channel	file:
+g_sslCtx	async-ssl-svr.cc	/^SSL_CTX* g_sslCtx;$/;"	v
+g_stop	async-ssl-svr.cc	/^int g_stop = 0;$/;"	v
+handleAccept	async-ssl-svr.cc	/^void handleAccept() {$/;"	f
+handleDataRead	async-ssl-svr.cc	/^void handleDataRead(Channel* ch) {$/;"	f
+handleHandshake	async-ssl-svr.cc	/^void handleHandshake(Channel* ch) {$/;"	f
+handleInterrupt	async-ssl-svr.cc	/^void handleInterrupt(int sig) {$/;"	f
+handleRead	async-ssl-svr.cc	/^void handleRead(Channel* ch) {$/;"	f
+handleWrite	async-ssl-svr.cc	/^void handleWrite(Channel* ch) {$/;"	f
+initSSL	async-ssl-svr.cc	/^void initSSL() {$/;"	f
+listenfd	async-ssl-svr.cc	/^int epollfd, listenfd;$/;"	v
+log	async-ssl-cli.cc	22;"	d	file:
+log	async-ssl-svr.cc	24;"	d	file:
+log	sync-ssl-cli.cc	15;"	d	file:
+log	sync-ssl-svr.cc	19;"	d	file:
+loop_once	async-ssl-svr.cc	/^void loop_once(int epollfd, int waitms) {$/;"	f
+main	async-ssl-cli.cc	/^int main (int argc, char **argv)$/;"	f
+main	async-ssl-svr.cc	/^int main(int argc, char **argv)  $/;"	f
+main	sync-ssl-cli.cc	/^int main (int argc, char **argv)$/;"	f
+main	sync-ssl-svr.cc	/^int main(int argc, char **argv)  $/;"	f
+setNonBlock	async-ssl-cli.cc	/^int setNonBlock(int fd, bool value) {$/;"	f
+setNonBlock	async-ssl-svr.cc	/^int setNonBlock(int fd, bool value) {$/;"	f
+socket	async-ssl-cli.cc	/^    int socket;$/;"	m	struct:SSLCon	file:
+socket	sync-ssl-cli.cc	/^    int socket;$/;"	m	struct:SSLCon	file:
+sslConnect	async-ssl-cli.cc	/^void sslConnect (SSLCon* con, const char* host, short port)$/;"	f
+sslConnect	sync-ssl-cli.cc	/^void sslConnect (SSLCon* con, const char* host, short port)$/;"	f
+sslConnected_	async-ssl-svr.cc	/^    bool sslConnected_;$/;"	m	struct:Channel	file:
+sslContext	async-ssl-cli.cc	/^SSL_CTX *sslContext;$/;"	v
+sslContext	sync-ssl-cli.cc	/^SSL_CTX *sslContext;$/;"	v
+sslHandle	async-ssl-cli.cc	/^    SSL *sslHandle;$/;"	m	struct:SSLCon	file:
+sslHandle	sync-ssl-cli.cc	/^    SSL *sslHandle;$/;"	m	struct:SSLCon	file:
+sslRead	async-ssl-cli.cc	/^void sslRead (SSLCon* con)$/;"	f
+sslRead	sync-ssl-cli.cc	/^void sslRead (SSLCon* con)$/;"	f
+sslWrite	async-ssl-cli.cc	/^void sslWrite (SSLCon* con, const char *text)$/;"	f
+sslWrite	sync-ssl-cli.cc	/^void sslWrite (SSLCon* con, const char *text)$/;"	f
+ssl_	async-ssl-svr.cc	/^    SSL *ssl_;$/;"	m	struct:Channel	file:
+tcpConnect	async-ssl-cli.cc	/^int tcpConnect (const char* svr, short port)$/;"	f
+tcpConnect	sync-ssl-cli.cc	/^int tcpConnect (const char* svr, short port)$/;"	f
+tcpConnected_	async-ssl-svr.cc	/^    bool tcpConnected_;$/;"	m	struct:Channel	file:
+update	async-ssl-svr.cc	/^    void update() {$/;"	f	struct:Channel
+~Channel	async-ssl-svr.cc	/^    ~Channel() {$/;"	f	struct:Channel
+~SSLCon	async-ssl-cli.cc	/^    ~SSLCon() {$/;"	f	struct:SSLCon
+~SSLCon	sync-ssl-cli.cc	/^    ~SSLCon() {$/;"	f	struct:SSLCon

@@ -1,0 +1,4 @@
+/home/changke/code/codeOfPractice/openssl/example2/CMakeFiles/edit_cache.dir
+/home/changke/code/codeOfPractice/openssl/example2/CMakeFiles/client.dir
+/home/changke/code/codeOfPractice/openssl/example2/CMakeFiles/rebuild_cache.dir
+/home/changke/code/codeOfPractice/openssl/example2/CMakeFiles/server.dir
