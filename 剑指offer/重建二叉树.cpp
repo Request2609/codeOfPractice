@@ -20,10 +20,37 @@ struct TreeNode {
 class Solution {
 public:
     TreeNode* reConstructBinaryTree(vector<int> pre,vector<int> vin) {
-        TreeNode * root = NULL ;
-        getRes(&root, 0, 0, pre, vin) ;                        
-        return root ;
+        int len = vin.size() ;
+        if(len < 0) {
+            return NULL ;
+        }
+        vector<int>leftpre, rightpre ;
+        vector<int>leftin, rightin ;
+        //创建新节点
+        TreeNode* head = new TreeNode(pre[0]) ;
+        int index = 0 ;
+        for(int i=0; i<len; i++) {
+            if(pre[0] == vin[i]) {
+                index = i ;
+                break ;
+            }
+        }
+        //记录左子树的先序遍历结果和后序遍历结果
+        for(int i=0; i<index; i++) {
+            leftpre.push_back(pre[i+1]) ;
+            leftin.push_back(vin[i]) ;
+        }
+        //记录右子树的先序遍历结果和中序遍历结果
+        for(int i=index+1; i<len; i++) {
+            rightpre.push_back(pre[i]) ;
+            rightin.push_back(vin[i]) ;
+        }
+        //继续递归
+        head->left = reConstructBinaryTree(leftpre, leftin) ;
+        head->right = reConstructBinaryTree(rightpre, rightin) ;
+        return head ;
     }
+    
     void getRes(TreeNode** root, int pindex, int mindex, vector<int>&pre, vector<int>&vin) {
         int lenp = pre.size() ;
         int lenv = vin.size() ;
@@ -43,8 +70,8 @@ public:
     }
 };
 
-int main()
-{
+int main() {
+
     return 0;
 }
 
