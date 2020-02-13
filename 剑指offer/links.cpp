@@ -35,6 +35,7 @@ void print(ListNode* head){
 void destroy(ListNode* head) {
     ListNode* cur = head->next ;
     while(cur) {
+        cout << "销毁" << endl ;
         head->next = cur->next ;
         free(cur) ;
         cur = head->next ;
