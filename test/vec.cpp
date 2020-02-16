@@ -12,7 +12,12 @@ int main()
         }
         ls.push_back(a) ;
     }
-    auto t = ls.find(1) ;
+    cout << ls.size() << "      " << ls[ls.size()-1]<< endl ;
+    ls.pop_back() ;
+    ls.pop_back() ;
+    ls.pop_back() ;
+    ls.pop_back() ;
+    cout << ls.size() << "      " << endl ;
     return 0;
 }
 

@@ -33,10 +33,27 @@ public:
                 cur1 = cur1->next ;
             }
         }
-        if(cur1)
-            cur1->next = cur2 ;
-        else 
-            pre->next = cur2 ;
+        if(cur1==NULL&&next2) {
+            pre->next = cur2 ;           
+        }
+        else {
+            int flag = 0 ;
+            while(cur1 && cur1->next) {
+                if(cur1->val >= cur2->val) {
+                    flag = 1 ;
+                    cur2->next = cur1 ;
+                    pre->next = cur2 ;      
+                    break ;
+                }
+                else {
+                    pre = cur1 ;
+                    cur1 = cur1->next ;
+                }
+            }
+            if(flag == 0) {
+                cur1->next = cur2 ;
+            }
+        }
         return pHead1 ;
     }
 };
