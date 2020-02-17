@@ -15,11 +15,12 @@ public:
     void getRes(TreeNode* root,  vector<vector<int>>&ls, vector<int>res, int expnum) {
         if(root) {
             int tmp = expnum-root->val  ;          
-            if(tmp == 0) {
+            if(tmp==0&&root->left&&root->right) {
                 res.push_back(root->val) ;
                 ls.push_back(res) ;
                 return ;
             }
+            if(tmp == 0) return ;
             if(tmp < 0) { return ; }
             res.push_back(root->val) ;
             getRes(root->left, ls, res, tmp) ;
