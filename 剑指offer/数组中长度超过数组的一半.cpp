@@ -23,7 +23,6 @@ public:
                 }
             }
         }
-        cout << mp.size() << endl ;
         if(mp[mem] <= (int)numbers.size()/2) {
             return 0 ;
         }
