@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <openssl/ssl.h>
 
-int main( int argc, char * argv[] )
+int main( int argc, char * argv[] ) 
 {
     int servfd, connfd;
     socklen_t clilen;

@@ -26,6 +26,7 @@ public:
             }
         }
     }
+
     int top() {
         return st[st.size()-1] ;
     }
@@ -33,9 +34,4 @@ public:
         return min_num;
     }
 };
-int main()
-{
-    std::cout << "Hello world" << std::endl;
-    return 0;
-}
 

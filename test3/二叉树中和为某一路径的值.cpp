@@ -21,7 +21,9 @@ public:
                 return ;
             }
             if(tmp == 0) return ;
-            if(tmp < 0) { return ; }
+            if(tmp < 0) { 
+                return ; 
+            }
             res.push_back(root->val) ;
             getRes(root->left, ls, res, tmp) ;
             getRes(root->right, ls, res, tmp) ;

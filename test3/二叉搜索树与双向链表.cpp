@@ -46,17 +46,22 @@ public:
         TreeNode* pre = NULL ;
         bool  isFirst = 1;
         while(p||!st.empty()) {
+            //遍历左子树
             while(p) {
                 st.push(p) ;
                 p = p->left ;
             }
+            //取左子树中的最后一个节点
             p = st.top() ;
             st.pop() ;
+            //要是第一个节点的话，设置左子树的第一节点为rootList节点
             if(isFirst) {
                 isFirst =0 ;
                 rootList = p ;
+                //设置当前根的值为pre
                 pre = rootList ;
             }
+            //要不是第一个节点
             else {
                 pre->right = p ;
                 p->left = pre ;

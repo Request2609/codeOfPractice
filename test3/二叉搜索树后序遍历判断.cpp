@@ -20,7 +20,7 @@ public:
         int index = start ;
         //找左子树的第一个节点
         while(seq[end] < root) {
-            index++ ;
+            end-- ;
         }
         int j = index ;
         while(j<end) {

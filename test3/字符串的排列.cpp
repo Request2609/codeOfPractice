@@ -15,7 +15,7 @@ public:
         }
         return true ;
     }
-    //不去重复元素
+
     void getRes(vector<string>&ls, string s, int index) {
         int len = s.size() ;
         if(index >= len) {
@@ -31,7 +31,6 @@ public:
             }
         }
     }
-
     bool check(string s, int start, int end) {
         if(end > start) {
             for(int j=start; j<end; j++) {

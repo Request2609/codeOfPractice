@@ -44,7 +44,6 @@ public :
             ls[left++] = temp[t++] ;
         }
     }
-
 } ;
 int main() {
     vector<int>ls ;

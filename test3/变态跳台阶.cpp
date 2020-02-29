@@ -10,13 +10,16 @@ public:
        ls.reserve(number) ;
        for(int i=0; i<number; i++) {
             int sum = 0 ;
+            //求0~n的和
             for(int j=0; j<i; j++) {
                 sum+=ls[j] ;
             }
+            //ls[n]为调到第n+1级台阶的方法数
             ls[i] = sum+1 ;
        }
        return ls[number-1] ;
     }
+
     //递归方法
     int jumpFloor(int target) {
         if(target == 0 || target==1) {

@@ -17,12 +17,12 @@ public:
         }
         return count ;
     }
-        
-     int  NumberOf1(int n) {
-         if(n >= 0) {
+
+    int  NumberOf1(int n) {
+        if(n >= 0) {
             return getNum1(n) ;
-         }
-         else{
+        }
+        else{
             n = -n ;
             int num =  0;
             vector<int>ls ;
@@ -45,18 +45,18 @@ public:
                 }
             }
             return count+32-ls.size() ;
-         }
-     }
-     int getNum1(int n) {
-         int count = 0 ;
-         int res = 0 ;
-         while(n) {
+        }
+    }
+    int getNum1(int n) {
+        int count = 0 ;
+        int res = 0 ;
+        while(n) {
             res = n%2 ;
             if(res == 1) count++ ;
             n/=2 ;
-         }
-         return count ;
-     }
+        }
+        return count ;
+    }
 };
 
 int main()
