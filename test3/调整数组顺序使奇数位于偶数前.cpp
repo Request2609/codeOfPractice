@@ -28,6 +28,7 @@ public:
             }
         }
     }
+
     //查找加插入排序
     void reOrderArray1(vector<int> &array) {
         int len = array.size() ;

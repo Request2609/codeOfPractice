@@ -52,11 +52,11 @@ int main()
     inet_ntop(AF_INET, &cliaddr.sin_addr, buff, INET_ADDRSTRLEN);
     uint16_t cli_port = ntohs(cliaddr.sin_port);
     printf("connection from %s, port %d\n", buff, cli_port);
-
+    char buf[1024] ;
     //关闭bind的sockfd
     close(sockfd);
-
-    //
+    read(sockfd, buf, sizeof(buf)) ;
+    std::cout << buf << std::endl; 
     sleep(1200);
 
     return 0;
