@@ -1,63 +1,70 @@
 #include <iostream>
+#include <stdio.h>
+#include <arpa/inet.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <netdb.h>
+#include <string.h>
+#include <netinet/in.h>
 #include <unistd.h>
-#include <stdio.h>
-#include <errno.h>
-#include <arpa/inet.h>
-#include <stdlib.h>
 
-void Perror(const char *s)
-{
-    perror(s);
-    exit(EXIT_FAILURE);
-}
-
-int main()
-{
-    int sockfd = socket(AF_INET, SOCK_STREAM, 0); //TCP
-    int backlog = 100;
-    short port = 9527; //端口
-    struct sockaddr_in servaddr;
-    servaddr.sin_family = AF_INET; //IPv4
-    servaddr.sin_addr.s_addr = htonl(INADDR_ANY); //表示由内核去选择IP地址
-    servaddr.sin_port = htons(port);
-
-    int flag = 1;
-    if (-1 == setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &flag, sizeof(flag))) {
-        Perror("setsockopt fail");
+int open_listenfd(char *port);
+int main(int argc, const char * argv[]) {
+    int listenfd, connfd = 0;
+    socklen_t clientlen;
+    listenfd = open_listenfd("8888");
+    int connd = accept(listenfd, (struct sockaddr*)&clientlen, &clientlen);
+    if (connfd < 1) {
+        printf("appect error");
     }
-
-    int res = bind(sockfd, (sockaddr *)&servaddr, sizeof(servaddr));
-    if (0 == res)
-        printf("server bind success, 0.0.0.0:%d\n", port);
-    else {
-        Perror("bind fail");
-    }
-
-    if (-1 == listen(sockfd, backlog)) {
-        Perror("listen fail");
-    }
-
-    //等待连接
-    struct sockaddr_in cliaddr;
-    socklen_t len = sizeof(cliaddr);
-    int connfd = accept(sockfd, (sockaddr *)&cliaddr, &len);
-    if (-1 == connfd) {
-        Perror("accept fail");
-    }
-
-    //解析客户端地址
-    char buff[INET_ADDRSTRLEN + 1] = {0};
-    inet_ntop(AF_INET, &cliaddr.sin_addr, buff, INET_ADDRSTRLEN);
-    uint16_t cli_port = ntohs(cliaddr.sin_port);
-    printf("connection from %s, port %d\n", buff, cli_port);
     char buf[1024] ;
-    //关闭bind的sockfd
-    close(sockfd);
-    read(sockfd, buf, sizeof(buf)) ;
-    std::cout << buf << std::endl; 
-    sleep(1200);
-
+    std::cout << "接受到一个新事件" << std::endl ;
+    int a = 0 ;
+    //关闭描述符，发起第四次挥手，关闭了写端
+    while(1) {
+        int ret = read(connfd, buf, sizeof(buf)) ;
+        if(ret < 0) {
+            std::cout << strerror(errno) << "      " << __LINE__ << std::endl ;
+        }
+        std::cout <<"接收到数据:" <<  a << std::endl ;
+    }
+    close(connfd);
+    close(listenfd);
     return 0;
 }
+
+
+int open_listenfd(char *port) {
+    
+    struct addrinfo hints, *listp, *p;
+    int listenfd = 0, optval = 1;
+    memset(&hints, 0, sizeof(struct addrinfo));
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG; // 被动的  任何IP address
+    hints.ai_flags |= AI_NUMERICSERV; // use port number
+    getaddrinfo(NULL, port, &hints, &listp);
+    
+    for (p = listp; p ; p = p->ai_next) {
+        if ((listenfd = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) < 0) {
+            continue;
+        }
+        
+        setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, (const void *)&optval, sizeof(int));
+        
+        if (bind(listenfd, p->ai_addr, p->ai_addrlen) == 0) {
+            break;//Success
+        }
+        close(listenfd);
+    }
+    
+    freeaddrinfo(listp);
+    if (!p) {
+        return -1;
+    }
+    if (listen(listenfd, 30) < 0) {
+        close(listenfd);
+        return -1;
+    }
+    return listenfd;
+}
+

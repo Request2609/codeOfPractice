@@ -1,15 +1,21 @@
 #include <iostream>
-#include <queue>
-using namespace std ;
-
-class A {
+class A{
 public :
     A() {
-        cout << "创建" << endl ;
+    }
+    A& operator=(const A& aa) {
+        this->a = aa.a ;
+        return *this ;
+    } 
+    A(const A&aa) {
+        a = aa.a ;
+    }
+    A*operator&(A&aa) {
+        return &aa ;
     }
     ~A() {
-        cout << ""
     }
+    int a ;
 };
 int main()
 {

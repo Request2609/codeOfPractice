@@ -1,50 +1,21 @@
 #include <iostream>
-#include <thread>
-#include <memory>
-#include <vector>
-class A {
-public:
-    A() {
-    }
-    int a ;
-};
 
-void func(std::shared_ptr<A>p) {
-    for(int a=0; a<10; a++) {
-        p->a += a ;
-    }
-    std::cout << p->a << std::endl ;
-}
-union test{
-    char c ;
-    int a ;
-};
-
-int main() {
-    test t ;
-    t.a = 1 ;
-    //判断大小端
-    printf("%d\n", *((int*)(&t.c))) ;
-    /*std::shared_ptr<A>ptr = std::make_shared<A>() ;   
-    std::thread t(func, ptr) ;
-    std::thread t1(func, ptr) ;
-    t.join() ;
-    t1.join() ;*/ /*
-    std::unique_ptr<A>ptr = std::make_unique<A>() ;
-    ptr->a = 10 ;
-    std::vector<std::unique_ptr<A>>ls ;
-    //支持容器操作
-    ls.push_back(ptr) ;*//*
-    long long a = (long long)1024*1024*1024*3 ;
-    char* p = (char*)malloc(a) ;
-    if(p == NULL) {
-        printf("系统空间不足\n") ;
-    }
-    else {
-        printf("已经分配\n") ;
-        getchar() ;
-        free(p) ;
-    }*/
-    return 0 ;
+int main()
+{
+    int a = 1 ;
+    //不能通过指针修改所指向的变量的值
+    const int* p= &a ;
+    int b= 10 ;
+    //但是可以通过该指针指向其他变量的地址
+    p = &b ;
+    std::cout << *p << std::endl ;
+    int const*q = &a ;
+    std::cout << *q << std::endl ;
+    q = &b ;
+    
+    //不能使用u指向其他的值
+    int* const u =&a;
+    std::cout << *u << std::endl ;
+    return 0;
 }
 
