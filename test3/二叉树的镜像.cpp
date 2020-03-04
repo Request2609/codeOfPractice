@@ -1,5 +1,6 @@
 #include <iostream>
 #include "binarytree.h"
+
 class Solution {
 public:
     void Mirror(TreeNode *pRoot) {

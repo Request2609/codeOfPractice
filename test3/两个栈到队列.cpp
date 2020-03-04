@@ -26,11 +26,11 @@ public:
         stack2.pop() ;
         return res ;
     }
-
 private:
     stack<int> stack1;
     stack<int> stack2;
 };
+
 int main()
 {
     Solution ss ;
