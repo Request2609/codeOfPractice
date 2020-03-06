@@ -19,6 +19,7 @@ struct TreeNode {
 
 class Solution {
 public:
+    //重建二叉树
     TreeNode* reConstructBinaryTree(vector<int> pre,vector<int> vin) {
         int len = vin.size() ;
         if(len < 0) {
@@ -29,6 +30,7 @@ public:
         //创建新节点
         TreeNode* head = new TreeNode(pre[0]) ;
         int index = 0 ;
+        //根据先序遍历的第一个元素(树的根节点),找出中序遍历结果中根节点的下标
         for(int i=0; i<len; i++) {
             if(pre[0] == vin[i]) {
                 index = i ;
@@ -36,37 +38,25 @@ public:
             }
         }
         //记录左子树的先序遍历结果和后序遍历结果
+        //将左子树的先序遍历结果存在leftpre数组（左子树的先序遍历结果）
+        //将中序遍历的左子树结果存在leftin数组（左子树的中序遍历结果）
         for(int i=0; i<index; i++) {
             leftpre.push_back(pre[i+1]) ;
             leftin.push_back(vin[i]) ;
         }
         //记录右子树的先序遍历结果和中序遍历结果
         for(int i=index+1; i<len; i++) {
+            //将右子树的先序遍历结果存在rightpre（右子树的先序遍历结果集合）
             rightpre.push_back(pre[i]) ;
+            //将左子树的线序遍历结果存在rightin集合
             rightin.push_back(vin[i]) ;
         }
-        //继续递归
+        //继续递归，返回结果作为左子树
         head->left = reConstructBinaryTree(leftpre, leftin) ;
+        //继续递归，返回结果作为右子树
         head->right = reConstructBinaryTree(rightpre, rightin) ;
+        //返回根节点的值
         return head ;
-    }
-    
-    void getRes(TreeNode** root, int pindex, int mindex, vector<int>&pre, vector<int>&vin) {
-        int lenp = pre.size() ;
-        int lenv = vin.size() ;
-        if(pindex >= lenp||mindex>lenv) {
-            return ;
-        }
-        int tmp = pre[pindex] ;
-        int mid = 0 ;
-        for(int i=0; i<lenv; i++) {
-            if(tmp == vin[i]) {
-                mid = i ;
-                break ;
-            }   
-        }
-        *root = (TreeNode*)malloc(sizeof(TreeNode)) ;
-        (*root)->val = tmp ;
     }
 };
 

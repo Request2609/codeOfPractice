@@ -22,6 +22,7 @@ public:
         return sum;
     }
 };
+
 int main()
 {
     Solution ss ;

@@ -24,7 +24,9 @@ public:
         }
         else {
             for(int i=3; i<=number; i++) {
+                //累加
                 target = form+form1 ;
+                //记录当前的方法数量
                 form = form1 ;
                 form1 = target ;
             }
@@ -32,6 +34,7 @@ public:
         return target ;
     }
 };
+
 int main()
 {
     Solution ss ;

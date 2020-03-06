@@ -34,15 +34,14 @@ public:
             else
                 return nullptr;
         }
-
         pBehind = pListHead;
         while(pAhead->next != nullptr){
             pAhead = pAhead->next;
             pBehind = pBehind->next;
         }
-
         return pBehind;
     }
+    //逆置链表的思路，再找出想要找的节点
     ListNode* FindKthToTail1(ListNode* pl, unsigned int k) {
         ListNode* cur = pl ;   
         ListNode* nexts = cur->next ;

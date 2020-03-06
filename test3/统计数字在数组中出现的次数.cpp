@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+
 class Solution {
 public:
     int GetNumberOfK(std::vector<int> data ,int k) {
@@ -17,8 +18,7 @@ public:
         return count ;
     }
 };
-int main()
-{
+int main() {
     std::cout << "Hello world" << std::endl;
     return 0;
 }

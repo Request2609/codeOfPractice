@@ -5,11 +5,11 @@
 class Solution {
 public:
     bool IsContinuous(std::vector<int> numbers) {
-	
+
         sort(numbers.begin(), numbers.end()) ;
         int len = numbers.size() ;
-	if(len == 0) return false ;        
-	int count = 0 ;
+        if(len == 0) return false ;        
+        int count = 0 ;
         for(int i=0; i<len-1; i++) {
             if(numbers[i] == 0) {
                 count++ ;
