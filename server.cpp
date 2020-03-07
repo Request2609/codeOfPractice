@@ -2,17 +2,28 @@
 #include <stdio.h>
 #include <arpa/inet.h>
 #include <sys/types.h>
+#include <fcntl.h>
 #include <sys/socket.h>
 #include <netdb.h>
 #include <string.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include  <unistd.h>    
+#include  <sys/types.h>  
+#include  <sys/socket.h>  
+#include  <sys/ioctl.h>  
+#include  <netinet/in.h>  
+#include <netinet/tcp.h>
+#include  <arpa/inet.h>  
+#include  <netdb.h>  
 
 int open_listenfd(char *port);
+
 int main(int argc, const char * argv[]) {
     int listenfd, connfd = 0;
     socklen_t clientlen;
     listenfd = open_listenfd("8888");
+    
     int connd = accept(listenfd, (struct sockaddr*)&clientlen, &clientlen);
     if (connfd < 1) {
         printf("appect error");
@@ -32,10 +43,8 @@ int main(int argc, const char * argv[]) {
     close(listenfd);
     return 0;
 }
-
-
 int open_listenfd(char *port) {
-    
+    int tmp = 1;
     struct addrinfo hints, *listp, *p;
     int listenfd = 0, optval = 1;
     memset(&hints, 0, sizeof(struct addrinfo));
@@ -48,6 +57,8 @@ int open_listenfd(char *port) {
         if ((listenfd = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) < 0) {
             continue;
         }
+    //    setsockopt(listenfd, IPPROTO_TCP, TCP_DEFER_ACCEPT, (const char*)&tmp, sizeof(int)) ;
+  //      setsockopt(listenfd, IPPROTO_TCP, TCP_NODELAY, (const char*)&tmp, sizeof(int)) ;
         
         setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, (const void *)&optval, sizeof(int));
         

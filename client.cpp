@@ -2,11 +2,13 @@
 #include <stdio.h>
 #include <arpa/inet.h>
 #include <sys/types.h>
+#include <fcntl.h>
 #include <sys/socket.h>
 #include <signal.h>
 #include <netdb.h>
 #include <string.h>
 #include <netinet/in.h>
+#include <netinet/tcp.h>
 #include <unistd.h>
 
 int open_clientfd(char *hostname,char *port);
@@ -35,6 +37,12 @@ void handle(int signo) {
     std::cout << "接收到管道信号" << std::endl ;
 }
 
+void setnoblocking(int fd) {
+    int flags=fcntl(fd,F_GETFL,0); 
+    flags |=O_NONBLOCK;
+    fcntl(fd,F_SETFL,flags);
+}
+
 int open_clientfd(char *hostname, char *port)
 {
     signal(SIGPIPE, handle) ;
@@ -53,21 +61,13 @@ int open_clientfd(char *hostname, char *port)
         if ((clientfd = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) < 0) {
             continue;/*socket faied try the next*/
         }
-        
+        setnoblocking(clientfd) ;
         if (connect(clientfd, p->ai_addr, p->ai_addrlen) == -1) {
             break ;
         }
         char buf[1024] ;
-        int a = 10 ;
-        while(1) {
-            std::cin >> buf ;
-            //故意一直写数据
-            if(a == -1) break ;
-            int ret = write(clientfd, buf, sizeof(buf)) ;
-            if(ret < 0) {
-                std::cout << __LINE__ << "   "  << strerror(errno) << std::endl ;
-            }
-        }
+        strcpy(buf, "hello") ;
+        int ret = write(clientfd, buf, sizeof(buf)) ;
         if (close(clientfd) < 0) {
             printf("open_lientfd: close failed\n");
             return -1;
