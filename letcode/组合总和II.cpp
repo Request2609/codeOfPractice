@@ -44,15 +44,6 @@ int main()
     }
     int target ;
     std::cin >> target ;
-    auto lis = ss.combinationSum2(ls, target) ;
-    int len = lis.size() ;
-    for(int i=0; i<len; i++) {
-        int size = lis[i].size() ;
-        for(int j=0; j<size; j++) {
-            std::cout << lis[i][j] << " " ;
-        }
-        std::cout << std::endl ;
-    }
     return 0;
 }
 

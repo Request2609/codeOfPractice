@@ -33,6 +33,7 @@ public:
         }
         return ls ;
     }
+
     //正解
     //根据等差数列求和公式
     //(high+low)(high-low+1)/2 
@@ -64,10 +65,10 @@ public:
             }
             std::cout << std::endl ;
         }
-
         return ls ;
     }
 };
+
 int main()
 {
     Solution ss ;

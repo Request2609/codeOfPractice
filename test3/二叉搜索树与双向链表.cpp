@@ -37,7 +37,7 @@ public:
         }
         return left!=NULL?left:pRootOfTree ;
     }
-
+    
     //非递归实现
     TreeNode* Convert1(TreeNode* root) {
         if(root == NULL) return NULL ;    
@@ -72,7 +72,7 @@ public:
         }
         return rootList ;
     }
-
+    
     void getRes(TreeNode*cur, TreeNode* pre) {
         if(cur) {
             getRes(cur->left, cur) ;

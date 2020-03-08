@@ -44,8 +44,8 @@ void heap_sort(std::vector<int>&ls) {
     }
 }
 
-int main()
-{
+int main() {
+
     std::vector<int>ls{3, 5, 3, 0, 8, 6, 1, 5, 8, 6, 2, 4, 9, 4, 7, 0, 1, 8, 9, 7, 3, 1, 2, 5, 9, 7, 4, 0, 2, 6} ;
     heap_sort(ls) ;
     for(int i=0; i<(int)ls.size(); i++) {

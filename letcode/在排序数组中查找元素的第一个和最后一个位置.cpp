@@ -85,14 +85,6 @@ public:
 };
 
 int main() {
-    Solution ss ;
-    std::vector<int>ls ;
-    while(1) {
-        int a ;
-        std::cin >> a ;
-        if(a == -1) break ;
-        ls.push_back(a) ;
-    }
     int num ;
     std::cin >> num ;
     auto se = ss.searchRange(ls, num) ;
