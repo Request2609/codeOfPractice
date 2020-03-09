@@ -1,0 +1,34 @@
+2020.3.9
+自我介绍
+介绍web服务器
+C++11智能指针你说下？
+模板是干什么的？
+你说下C++中的RTTI？
+出个题？你设计一个类实现callable？
+有下面功能：
+
+// Test code
+std::string test_func(int a, const char * b) {
+  return std::to_string(a) + std::string(b);
+}
+
+
+namespace dosk {
+ ///adadada
+};
+
+
+dosk::function<std::string(int, const char *)> closure_1 = test_func;
+std::cout << closure_1(123, "456") << std::endl;
+
+你说下红黑树的特性？
+插入原理？
+你第三个项目是干什么的，我不清楚他是干啥的？
+你用的fsnotify还是就是fanotify？
+你说下hook，我想听是不是我想的那个hook？
+你用hook的实现流程？
+我觉的今天面试ok，你还有什么要问我的？
+这人是设计浏览器内核的
+你有没有想过在windows下开发？
+这次面试竟然没问算法，这两天被算法折磨惨了，竟然没问！！！
+这次面试感觉比较轻松吧！应该可以进入下一轮了，面试官挺开心！

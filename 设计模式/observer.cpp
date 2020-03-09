@@ -36,7 +36,8 @@ void concreteObserver2::update() {
         int state = csub->getState() ;
         cout << "获取到对象状态---->" << state << endl ;
     }
-} 
+}
+
 int main() {
     shared_ptr<subject> sub = make_shared<concreteSubject>() ;
     shared_ptr<observer>obser = make_shared<concreteObserver1>() ;
