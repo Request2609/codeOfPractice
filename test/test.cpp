@@ -5,6 +5,8 @@ public:
     B() {}
     virtual ~B() {}
     virtual void print() {}
+private:
+    int a ;
 };
 
 class A : public B {
@@ -16,6 +18,7 @@ public:
 };
 
 int main() {
+
     std::cout << sizeof(A) << std::endl ;
     return 0;
 }
