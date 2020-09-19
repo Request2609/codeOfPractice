@@ -34,6 +34,7 @@ public:
         low->next = low->next->next ;
         return head ;
     }
+
     //解决方法
     ListNode* removeNthFromEnd1(ListNode*head, int n) {
         if(!head||!head->next) return NULL ;

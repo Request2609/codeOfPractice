@@ -21,6 +21,21 @@ public:
         }
         return true ;
     }
+    bool jump(std::vector<int>&nums) {
+        int len = nums.size() ;
+        return jumpOK(nums, len-1) ; 
+    }
+    bool jumpOK(std::vector<int>&nums, int last){
+        if(last == 0) {
+            return true ;
+        }
+        for(int i=last-1; i>=0; i--) {
+            if(nums[i]+i>=last) {
+                jumpOK(nums, i) ;
+            }
+        }
+        return false ;
+    }
 };
 
 int main()

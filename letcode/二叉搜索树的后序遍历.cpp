@@ -1,6 +1,6 @@
 #include <iostream>
-
 #include <vector>
+
 class Solution {
 public :
     bool VerifySquenceOfBst(std::vector<int>sequence) {
@@ -10,6 +10,7 @@ public :
         int res = getRes(sequence, 0, sequence.size()-1) ;
         return res ;
     }
+
     int getRes(std::vector<int>seq, int left, int right) {
         if(left>=right) {
             return true ;
@@ -32,6 +33,7 @@ public :
         return getRes(seq, left, index-1)&&getRes(seq, index, right-1) ;
     }
 };
+
 int main()
 {
     std::cout << "Hello world" << std::endl;

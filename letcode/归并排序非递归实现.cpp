@@ -16,7 +16,7 @@ public :
     //非递归实现
     void sort1(std::vector<int>ls, int left, int right, std::vector<int>&tmp) {
         int len = ls.size() ;
-        int size = 0 ;
+        int size = 1 ;
         while(size<len) {
             for(int j=0; j<len; j+=size*2) {
                 //左边界的长度

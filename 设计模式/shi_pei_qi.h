@@ -34,5 +34,5 @@ public :
     void request() ;
 private :
     shared_ptr<adaptee> adt ;
-};
+}
 

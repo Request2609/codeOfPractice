@@ -20,7 +20,6 @@ public:
                 ls.push_back(res) ;
                 return ;
             }
-            if(tmp == 0) return ;
             if(tmp < 0) { 
                 return ; 
             }

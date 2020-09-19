@@ -23,6 +23,7 @@ public:
             }
         }
     }
+
     bool check(int start, int end, std::vector<int>num) {
         for(int i=start; i<end; i++) {
             if(num[i] == num[end]) {

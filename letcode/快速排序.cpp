@@ -25,6 +25,30 @@ int sort(std::vector<int>&ls, int l, int r) {
     return i ;
 }
 
+void quickSort(std::vector<int>&ls, int l, int r) {
+    if (l >= r) return;
+    int low = l ;
+    int high = r ;
+    int key = ls[low];
+    while(low < high) {
+        while(low < high && ls[high] >= key) {
+            high-- ;
+        }
+        if(low<high) {
+            ls[low++] = ls[high] ;
+        }
+        while(low < high && ls[low] <= key) {
+            low++ ;
+        }
+        if (low < high) {
+            ls[high--] = ls[low] ;
+        }
+    }
+    ls[low] = key ;
+    quickSort(ls, l, low) ;
+    quickSort(ls, low+1, r) ;
+}
+
 void quicksort(std::vector<int>&ls, int l, int r) {
     int index = 0 ;
     while(l<r) {
